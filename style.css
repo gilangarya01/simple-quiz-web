@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+.hide {
+    display: none;
+}
+
 main {
     height: 100vh;
     display: flex;
@@ -53,7 +57,7 @@ main {
     margin-bottom: 20px;
 }
 
-#answer-area .pilihan {
+#answer-area .answer {
     width: 15rem;
     height: 5rem;
     background-color: #98E4FF;
@@ -64,7 +68,7 @@ main {
     border-radius: 20px;
 }
 
-#answer-area .pilihan:hover {
+#answer-area .answer:hover {
     background-color: #80B3FF;
     cursor: pointer;
 }
