@@ -1,11 +1,5 @@
 
-const answer = document.querySelectorAll(".answer")
-const question = document.querySelector("#question-area p")
-const questionArea = document.querySelector("#question-area")
-const score = document.querySelector("#score-area h3 span")
-const scoreArea = document.querySelector("#score-area")
-const quizArea = document.querySelector("#quiz-area")
-
+// Array soal
 let soal = [
     ["Siapakah tokoh sejarah yang merupakan penemu alat listrik, terkenal dengan eksperimen layang-layang, dan menulis 'Kunci Elektrik'?", "Benjamin Franklin", ["Albert Einstein", "Thomas Edison", "Nikola Tesla", "Benjamin Franklin"]],
     ["Apa yang menjadi penyebab utama terjadinya gerhana matahari?", "Bulan berada di antara Bumi dan Matahari", ["Bumi berada di antara Matahari dan Bulan", "Bulan berada di antara Bumi dan Matahari", "Matahari berada di antara Bumi dan Bulan", "Bumi berada di depan Matahari"]],
@@ -19,13 +13,24 @@ let soal = [
     ["Siapakah penulis terkenal yang mengarang novel 'Matahari Juga Bangkit'?", "Ernest Hemingway", ["Jane Austen", "Charles Dickens", "F. Scott Fitzgerald", "Ernest Hemingway"]]
 ]
 
+// DOM
+const answer = document.querySelectorAll(".answer")
+const question = document.querySelector("#question-area p")
+const questionArea = document.querySelector("#question-area")
+const score = document.querySelector("#score-area h3 span")
+const scoreArea = document.querySelector("#score-area")
+const quizArea = document.querySelector("#quiz-area")
+
 // acak urutan soal dari array yang sudah dibuat
 const acakSoal = soal.sort(() => 0.5 - Math.random())
+
+// Variable
 let count = 0
 let correctAnswer = 0
 let jumlahSkor = soal.length
 let dataSoal
 
+// Menampilkan soal saat & jawaban saat pertama kali dibuka
 tampilSoal()
 tampilJawaban()
 
@@ -33,35 +38,43 @@ for (var i = 0; i < answer.length; i++) {
     answer[i].addEventListener("click", (item) => {
         count += 1
 
+        // Mengecek apakah soal yang dipilih benar
         if(dataSoal[1] == item.target.textContent) {
             correctAnswer += 1
         }
 
-        tampilSoal()
-        tampilJawaban()
+        // Menampilkan soal baru dan
+        // cek apakah semua soal sudah dijawab
+        if(count < soal.length) {
+            tampilSoal()
+            tampilJawaban()
+        } else {
+            hasilSkor()
+        }
     })
 }
 
+// Fungsi untuk menampilkan soal
 function tampilSoal() {
     dataSoal = acakSoal[count]
-    if(count < soal.length) {
-        question.textContent = dataSoal[0]
-    } else {
-        quizArea.classList.toggle("hide")
-        scoreArea.classList.toggle("hide")
+    question.textContent = dataSoal[0]
+}
 
-        // Menghitung Skor
-        let skor = (correctAnswer/jumlahSkor) * 100
-        score.textContent = Math.round(skor)
+// Fungsi untuk menampilkan jawaban
+function tampilJawaban() {
+    let pilihanGanda = dataSoal[2].sort(() => 0.5 - Math.random())
+    for (var i = 0; i < answer.length; i++) {
+        answer[i].textContent = pilihanGanda[i]
     }
 }
 
-function tampilJawaban() {
-    
-    if(count < soal.length) {
-        let pilihanGanda = dataSoal[2].sort(() => 0.5 - Math.random())
-        for (var i = 0; i < answer.length; i++) {
-            answer[i].textContent = pilihanGanda[i]
-        }
-    }
+// Fungsi untuk menghitung skor,
+// menyembunyikan area quiz dan menampilkan hasil skor
+function hasilSkor() {
+    quizArea.classList.toggle("hide")
+    scoreArea.classList.toggle("hide")
+
+    // Menghitung Skor
+    let skor = (correctAnswer/jumlahSkor) * 100
+    score.textContent = Math.round(skor)
 }
