@@ -14,20 +14,28 @@ const acakSoal = soal.sort((a, b) => 0.5 - Math.random())
 let count = 0
 let correctAnswer = 0
 let jumlahSkor = soal.length
-let dataSoal = acakSoal[count]
+let dataSoal
 
 tampilSoal()
+tampilJawaban()
 
 for (var i = 0; i < answer.length; i++) {
-    answer[i].addEventListener("click", () => {
+    answer[i].addEventListener("click", (item) => {
+        count += 1
+
+        if(dataSoal[1] == item.target.textContent) {
+            correctAnswer += 1
+        }
+
         tampilSoal()
+        tampilJawaban()
     })
 }
 
 function tampilSoal() {
+    dataSoal = acakSoal[count]
     if(count < 3) {
         question.textContent = dataSoal[0]
-        count += 1
     } else {
         for (var i = 0; i < answer.length; i++) {
             answer[i].classList.add("hide")
@@ -37,5 +45,16 @@ function tampilSoal() {
         // Menghitung Skor
         let skor = (correctAnswer/jumlahSkor) * 100
         console.log("Hasil: " +skor)
+    }
+}
+
+function tampilJawaban() {
+    
+    if(count < 3) {
+        let correct = dataSoal[1]
+        let pilihanGanda = dataSoal[2].sort((a, b) => 0.5 - Math.random())
+        for (var i = 0; i < answer.length; i++) {
+            answer[i].textContent = pilihanGanda[i]
+        }
     }
 }
