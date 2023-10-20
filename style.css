@@ -7,7 +7,7 @@
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 main {
@@ -20,7 +20,16 @@ main {
 }
 
 /* index.html */
-#judul {
+#quiz-area {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.judul {
     font-size: 100px;
     color: white;
 }
@@ -48,7 +57,7 @@ main {
 
 #question-area {
     background-color: #80B3FF;
-    width: 75%;
+    width: 50%;
     padding: 20px;
     border-radius: 10px;
     color: #292929;
@@ -69,6 +78,34 @@ main {
 }
 
 #answer-area .answer:hover {
+    background-color: #80B3FF;
+    cursor: pointer;
+}
+
+/* Hasil Skor */
+
+#score-area h3 {
+    font-size: 20px;
+    color: #292929;
+    text-align: center;
+}
+
+#score-area a {
+    display: block;
+    margin-top: 40px;
+    text-align: center;
+    background-color: #98E4FF;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    color: #292929;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px 60px;
+    border-radius: 10px;
+}
+
+#score-area a:hover {
     background-color: #80B3FF;
     cursor: pointer;
 }
